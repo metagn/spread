@@ -1,0 +1,26 @@
+name: spread
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: jiro4989/setup-nim-action@v1
+
+      - name: install nimbleutils
+        run: nimble install -y https://github.com/metagn/nimbleutils@#HEAD
+      
+      - name: install dependencies
+        run: nimble install -y
+
+      - name: run tests
+        run: nimble tests
