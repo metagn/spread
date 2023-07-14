@@ -32,11 +32,12 @@ macro spread*(call: untyped, args: varargs[untyped]): untyped =
     assert arr == [1, 2, 3]
 
     # table constructors:
-    let tab = {:}.spread:
-      "a" = 1 # constructors convert = in a statement to :
-      _("b": 2, "c": 3) # all arguments of _ are spread directly
+    when false: # (nim doc renders badly)
+      let tab = {:}.spread:
+        "a" = 1 # constructors convert = in a statement to :
+        _("b": 2, "c": 3) # all arguments of _ are spread directly
 
-    assert tab == {"a": 1, "b": 2, "c": 3}
+      assert tab == {"a": 1, "b": 2, "c": 3}
 
     # object or tuple constructors need a single `_: _``:
     type Foo = object
@@ -75,6 +76,11 @@ macro spread*(call: untyped, args: varargs[untyped]): untyped =
 template `...`*(call: untyped, args: varargs[untyped]): untyped =
   ## operator version of `spread`
   runnableExamples:
+    proc foo(a, b, c: int) =
+      echo "a: ", a
+      echo "b: ", b
+      echo "c: ", c
+
     ...foo:
       1
       c = 3
