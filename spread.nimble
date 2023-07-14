@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.2.0"
 author        = "metagn"
 description   = "macro for spreading blocks into call parameters/collections"
 license       = "MIT"
@@ -25,7 +25,7 @@ task docs, "build docs for all modules":
 task tests, "run tests for multiple backends and defines":
   when declared(runTests):
     runTests(
-      backends = {c, #[js]#},
+      backends = {c, js, nims},
     )
   else:
     echo "tests task not implemented, need nimbleutils"
